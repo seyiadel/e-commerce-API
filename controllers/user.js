@@ -83,5 +83,42 @@ const loginUser = async (req, res) => {
     
 }
 
-module.exports = {registerUser, loginUser}
+const updateUserToAdmin = async (req, res) => {
+    const {role, userId} = req.body
+    try{
+        if (role && userId) {
+            const user = await User.findOne({_id:userId})
+            if (user.role === 'admin'){
+                res.status(200).json(
+                    {
+                        "success":true,
+                        "message": "User is already ADMIN",
+                        "data": user
+                    }
+                )
+            }else{
+                user.role = 'admin'
+                await user.save()
+                res.status(200).json(
+                    {
+                        "success":true,
+                        "message": "[SUCCESS] - User is an ADMIN",
+                        "data": user
+                    }
+                )
+            }
+        }
+    } catch (error) {
+        res.status(400).json(
+            {
+                "success":false,
+                "message": "User Role not updated",
+                "data": error
+            }
+        )
+    }
+
+}
+
+module.exports = {registerUser, loginUser, updateUserToAdmin}
 

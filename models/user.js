@@ -21,9 +21,10 @@ const userSchema = new mongoose.Schema({
         required:[true, "Enter a password"],
     },
 
-    isAdmin: {
-        type:Boolean,
-        default:false
+    role: {
+        type:String,
+        default:"Basic",
+        required:true
     }
 })
 
