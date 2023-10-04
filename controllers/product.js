@@ -1,4 +1,4 @@
-const Product = require('../models/productModel')
+const Product = require('../models/product')
 
 const createProduct = async (req, res) => {
     const product = Product(req.body)
@@ -21,7 +21,7 @@ const createProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
     try{
-        const product = Product.updateOne({_id: req.params.product_id}, req.body)
+        const product = await Product.updateOne({_id: req.params.product_id}, req.body)
         if (!product){
             res.status(404).json({
                 "success":true,
@@ -62,7 +62,7 @@ const deleteProduct = async (req, res) => {
 
 const getAllProducts = async (req, res) => {
     try{
-        const poducts = await Product.find().all()
+        const products = await Product.find().all()
         res.status(200).json({
             "success":true,
             "message":"Products retrieved successfully",
