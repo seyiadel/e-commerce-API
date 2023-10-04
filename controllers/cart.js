@@ -2,8 +2,8 @@ const Product = require('../models/product')
 const Cart = require('../models/cart')
 
 const addToCart = async (req, res) => {
-    let productId = req.body
-    let quantity = req.body.quantity
+    let productId = req.body.productId
+    let quantity = parseInt(req.body.quantity)
     
     try{
         let cart = Cart.find().populate('cartItems.productId')

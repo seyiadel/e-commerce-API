@@ -10,7 +10,7 @@ const cartItemSchema = new mongoose.Schema(
 )
 
 
-
+// Main Cart
 const cartSchema = new mongoose.Schema(
     {
         cartItems : [cartItemSchema],
