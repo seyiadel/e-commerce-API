@@ -1,5 +1,6 @@
 const Product = require('../models/product')
 const Cart = require('../models/cart')
+const request = require('request')
 
 const addToCart = async (req, res) => {
     let productId = req.body.productId
@@ -134,4 +135,39 @@ const clearCart = async (req, res) => {
 }
     //atribute to be added : cartOwner = req.user.id
 
-module.exports = {addToCart, getTheCart, clearCart}
+
+const cartCheckout = (req, res) => {
+    const email = req.body.email
+
+    const cart = Cart.find().populate('cartItems.productId')
+
+    const params = JSON.stringify({
+        "email": email,
+
+        "amount": cart.subTotal * 100 
+    })
+    
+    const options = {
+        port: 443,
+        uri: 'https://api.paystack.co/transaction/initialize',  
+        method: 'POST',
+        headers: {
+            Authorization: process.env.PAYSTACK_SECRET_KEY,
+            'Content-Type': 'application/json'
+        },
+        body:params
+    }
+    
+    request.post(options, (err, body)=>{
+        if (err) {
+            console.log(err)
+            res.status(400).json(err)
+        }else{
+            let data = JSON.parse(body.body)
+            res.status(200).json(data)
+        }
+    })
+        
+}
+
+module.exports = {addToCart, getTheCart, clearCart, cartCheckout}

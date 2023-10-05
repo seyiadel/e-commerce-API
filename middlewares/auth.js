@@ -56,4 +56,4 @@ const adminAuth = (req, res, next) => {
 }
 
 
-module.exports = {userAuth,}
+module.exports = {userAuth, adminAuth}

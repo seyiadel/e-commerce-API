@@ -5,10 +5,9 @@ const userRouter = require('./routes/user')
 const productRouter = require('./routes/product')
 const cartRouter = require('./routes/cart')
 
-connectDatabase();
 
 app.use(express.json());
-app.use('/api/v1/',{userRouter, productRouter, cartRouter });
+app.use('/api/v1/',[userRouter, productRouter, cartRouter]);
 
 const port = 3000
 

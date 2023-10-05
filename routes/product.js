@@ -1,7 +1,7 @@
 const express = require('express')
 const productRouter = express.Router()
 const {createProduct, updateProduct, deleteProduct, getAllProducts, getSingleProduct} = require('../controllers/product')
-const adminAuth = require('../middlewares/auth')
+const {adminAuth} = require('../middlewares/auth')
 
 // Admin Endpoints
 productRouter.route('/admin/products').post(adminAuth, createProduct).get(getAllProducts)
