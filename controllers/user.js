@@ -54,9 +54,11 @@ const loginUser = async (req, res) => {
     if(userData){
         const passwordCompare = await bcrypt.compare(req.body.password, userData.password)
         const payload = {
+            "_id":userData._id,
             "first_name": userData.first_name,
-            "last_name": userData.last_name,
-            "email": userData.email
+            "last_name": userData.last_name, 
+            "email": userData.email,
+            "role":userData.role
         }
         if(passwordCompare){
             //Generate JWT for Authorization
