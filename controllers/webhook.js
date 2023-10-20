@@ -12,4 +12,9 @@ const webhook = async (req, res) => {
     }
 }
 
-module.exports = webhook
+const healthCheckPath = async (req, res) => {
+    console.log("status : [SUCCESS]- API is healthy")
+    res.status(200).json({"status": "[SUCCESS]- API is healthy"})
+}
+
+module.exports = {webhook, healthCheckPath}
