@@ -4,9 +4,8 @@ require('dotenv').config()
 
 
 const connectDatabase = () =>{
-    const connectionParams={
+    const connectionParams = {
         useNewUrlParser: true,
-        useCreateIndex: true,
         useUnifiedTopology: true
     }
     mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.DATABASE_PASSWORD}@cluster0.pkitfhz.mongodb.net/?retryWrites=true&w=majority`, connectionParams)
