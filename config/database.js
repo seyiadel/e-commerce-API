@@ -1,8 +1,15 @@
 const mongoose = require("mongoose")
 require('dotenv').config()
 
+
+
 const connectDatabase = () =>{
-    mongoose.connect(process.env.DATABASE_URI)
+    const connectionParams={
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+    }
+    mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.DATABASE_PASSWORD}@cluster0.pkitfhz.mongodb.net/?retryWrites=true&w=majority`, connectionParams)
     .then( () => {
         console.log('[200] SUCCESS: Database Connected')}
         ).catch(
