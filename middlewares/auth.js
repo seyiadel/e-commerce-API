@@ -12,6 +12,7 @@ const userAuth = (req, res, next) => {
         } else{
             // Valid Token sent and Verified
             console.log("[SUCCESS] - Token Authorized")
+            req.user = authToken
         }
     })
     next()
@@ -29,6 +30,7 @@ const adminAuth = (req, res, next) => {
            
         } else{
             console.log("[SUCCESS] - Valid Token and Admin")
+            req.user = token
         }
       
     })
