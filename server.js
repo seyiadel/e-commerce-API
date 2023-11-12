@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const connectDatabase = require('./config/database')
 const userRouter = require('./routes/user')
 const productRouter = require('./routes/product')
@@ -7,6 +8,12 @@ const cartRouter = require('./routes/cart')
 const webhookRouter = require('./routes/webhook')
 
 app.use(express.json());
+
+var corsOptions = {
+    origin: '*'
+};
+
+app.use(cors(corsOptions));
 
 app.use('/api/v1/',[userRouter, productRouter, cartRouter, webhookRouter]);
 
